@@ -1,0 +1,928 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Découvrez L'Atelier des Saveurs, un restaurant fictif de cuisine française de saison.">
+  <meta name="theme-color" content="#17231e">
+  <title>L'Atelier des Saveurs — Cuisine de saison</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --green: #17231e;
+      --green-light: #263b30;
+      --cream: #f8f5ed;
+      --paper: #fffdf8;
+      --orange: #c8784c;
+      --text: #252a25;
+      --muted: #77796f;
+      --line: #e7e1d6;
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "DM Sans", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 85px;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      color: var(--text);
+      background: var(--paper);
+      line-height: 1.65;
+    }
+
+    img { display: block; max-width: 100%; }
+
+    a { color: inherit; text-decoration: none; }
+
+    button, input, textarea { font: inherit; }
+
+    button, a { -webkit-tap-highlight-color: transparent; }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      color: var(--orange);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1, h2, h3 { font-family: var(--serif); font-weight: 500; }
+
+    h2 {
+      font-size: clamp(32px, 4vw, 47px);
+      line-height: 1.15;
+      margin-bottom: 18px;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      max-width: 570px;
+      margin: 0 auto;
+    }
+
+    .center { text-align: center; }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 23px;
+      border: 1px solid transparent;
+      border-radius: 3px;
+      background: var(--orange);
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+      transition: transform .2s, background .2s;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background: #a95f38;
+      transform: translateY(-2px);
+    }
+
+    .button-outline {
+      background: transparent;
+      border-color: rgba(255,255,255,.65);
+      color: white;
+    }
+
+    .button-outline:hover { background: white; color: var(--green); }
+
+    /* Navigation */
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      line-height: 1.15;
+    }
+
+    .brand-icon {
+      width: 39px;
+      height: 39px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--orange);
+      border-radius: 50%;
+      color: var(--orange);
+      font-family: var(--serif);
+      font-size: 22px;
+    }
+
+    .brand strong {
+      display: block;
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .brand small {
+      color: var(--muted);
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 27px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .nav-links a:not(.button):hover { color: var(--orange); }
+
+    .nav-links .button { padding: 11px 16px; }
+
+    .menu-toggle {
+      display: none;
+      border: 1px solid var(--line);
+      padding: 8px 12px;
+      background: transparent;
+      color: var(--green);
+      cursor: pointer;
+    }
+
+    /* Hero */
+
+    .hero {
+      position: relative;
+      min-height: 590px;
+      display: flex;
+      align-items: center;
+      color: white;
+      background:
+        linear-gradient(90deg, rgba(15,25,20,.88), rgba(15,25,20,.48) 55%, rgba(15,25,20,.12)),
+        url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=2000&q=85")
+        center 55% / cover;
+    }
+
+    .hero-content {
+      max-width: 650px;
+      padding: 90px 0;
+    }
+
+    .hero .eyebrow { color: #f0b18b; }
+
+    .hero h1 {
+      font-size: clamp(43px, 7vw, 76px);
+      line-height: 1.04;
+      margin: 22px 0;
+    }
+
+    .hero h1 em {
+      color: #edb38e;
+      font-weight: 400;
+    }
+
+    .hero p {
+      max-width: 490px;
+      color: rgba(255,255,255,.83);
+      font-size: 15px;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    .hero-note {
+      margin-top: 32px;
+      font-size: 11px;
+      color: rgba(255,255,255,.72);
+      letter-spacing: .5px;
+    }
+
+    /* Highlights */
+
+    .highlights {
+      background: var(--green);
+      color: white;
+    }
+
+    .highlight-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      padding: 25px 0;
+    }
+
+    .highlight {
+      text-align: center;
+      padding: 8px 18px;
+      border-right: 1px solid rgba(255,255,255,.15);
+    }
+
+    .highlight:last-child { border-right: 0; }
+
+    .highlight strong {
+      display: block;
+      font-family: var(--serif);
+      font-size: 19px;
+      font-weight: 500;
+    }
+
+    .highlight span {
+      color: #c5c9c0;
+      font-size: 11px;
+    }
+
+    /* Story */
+
+    .section { padding: 100px 0; }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 75px;
+      align-items: center;
+    }
+
+    .story-image { position: relative; }
+
+    .story-image img {
+      width: 100%;
+      height: 470px;
+      object-fit: cover;
+      border-radius: 3px;
+    }
+
+    .image-label {
+      position: absolute;
+      right: -18px;
+      bottom: 24px;
+      padding: 19px 24px;
+      background: var(--cream);
+      font-family: var(--serif);
+      font-size: 17px;
+      box-shadow: 0 8px 25px #00000012;
+    }
+
+    .story-copy p { color: var(--muted); }
+
+    .signature {
+      margin-top: 25px;
+      color: var(--green);
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 24px;
+    }
+
+    /* Menu */
+
+    .menu-section { background: var(--cream); }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 48px;
+    }
+
+    .menu-card {
+      background: var(--paper);
+      border: 1px solid #ece6dc;
+      overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 35px #1c271c0d;
+    }
+
+    .menu-card img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+    }
+
+    .menu-card-content { padding: 24px; }
+
+    .menu-card h3 {
+      font-size: 23px;
+      margin-bottom: 8px;
+    }
+
+    .menu-card p {
+      color: var(--muted);
+      font-size: 13px;
+      min-height: 65px;
+      margin-bottom: 15px;
+    }
+
+    .price {
+      color: var(--orange);
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .menu-footnote {
+      margin-top: 25px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* Gallery */
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr 1fr;
+      gap: 15px;
+      margin-top: 40px;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 3px;
+    }
+
+    /* Reservation */
+
+    .reservation {
+      background: var(--green);
+      color: white;
+    }
+
+    .reservation-grid {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 75px;
+      align-items: start;
+    }
+
+    .reservation .eyebrow { color: #edb38e; }
+
+    .reservation-copy p { color: #c6cec6; }
+
+    .info-line {
+      margin-top: 24px;
+      padding-top: 17px;
+      border-top: 1px solid #ffffff24;
+    }
+
+    .info-line strong {
+      display: block;
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .info-line span {
+      color: #c6cec6;
+      font-size: 13px;
+    }
+
+    .booking-form {
+      padding: 30px;
+      background: #ffffff0a;
+      border: 1px solid #ffffff20;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 17px;
+    }
+
+    .field { margin-bottom: 17px; }
+
+    .field label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 12px;
+      color: #e4e8e1;
+    }
+
+    .field input, .field select, .field textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ffffff28;
+      border-radius: 2px;
+      background: #ffffff0c;
+      color: white;
+      outline: none;
+    }
+
+    .field select option { color: #222; }
+
+    .field input:focus, .field select:focus {
+      border-color: #edb38e;
+    }
+
+    .booking-form .button { width: 100%; }
+
+    .form-note {
+      margin: 14px 0 0;
+      font-size: 11px;
+      color: #c6cec6;
+    }
+
+    #form-message {
+      display: none;
+      margin-top: 16px;
+      padding: 12px;
+      border: 1px solid #edb38e;
+      color: white;
+      font-size: 13px;
+    }
+
+    /* Footer */
+
+    footer {
+      background: #101914;
+      color: white;
+      padding: 30px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    footer p {
+      color: #b9c0b8;
+      font-size: 11px;
+      margin: 0;
+    }
+
+    .demo-tag {
+      display: inline-block;
+      padding: 5px 9px;
+      background: #ffffff12;
+      border: 1px solid #ffffff25;
+      border-radius: 2px;
+      color: #f0c4a8;
+      font-size: 10px;
+    }
+
+    /* Mobile */
+
+    @media (max-width: 780px) {
+      .nav { min-height: 70px; }
+
+      .menu-toggle { display: block; }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 69px;
+        left: 0;
+        right: 0;
+        padding: 20px;
+        background: var(--paper);
+        border-bottom: 1px solid var(--line);
+        flex-direction: column;
+        align-items: stretch;
+        gap: 18px;
+      }
+
+      .nav-links.open { display: flex; }
+
+      .nav-links .button { width: 100%; }
+
+      .hero { min-height: 540px; background-position: 58% center; }
+
+      .hero-content { padding: 70px 0; }
+
+      .highlight-grid { grid-template-columns: 1fr; padding: 12px 0; }
+
+      .highlight {
+        border-right: 0;
+        border-bottom: 1px solid #ffffff18;
+        padding: 13px;
+      }
+
+      .highlight:last-child { border-bottom: 0; }
+
+      .section { padding: 70px 0; }
+
+      .story-grid, .reservation-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .story-image img { height: 340px; }
+
+      .image-label { right: 10px; }
+
+      .menu-grid { grid-template-columns: 1fr; }
+
+      .menu-card img { height: 230px; }
+
+      .menu-card p { min-height: auto; }
+
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+
+      .gallery-grid img { height: 190px; }
+
+      .gallery-grid img:first-child {
+        grid-column: 1 / -1;
+        height: 230px;
+      }
+
+      .booking-form { padding: 22px; }
+
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .container { width: min(100% - 28px, 1120px); }
+
+      .brand strong { font-size: 16px; }
+
+      .hero h1 { font-size: 43px; }
+
+      .hero-actions .button { width: 100%; }
+
+      .form-grid { grid-template-columns: 1fr; gap: 0; }
+
+      .gallery-grid { gap: 9px; }
+
+      .gallery-grid img { height: 145px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <nav class="nav container" aria-label="Navigation principale">
+      <a class="brand" href="#accueil" aria-label="L'Atelier des Saveurs, accueil">
+        <span class="brand-icon">A</span>
+        <span>
+          <strong>L'Atelier des Saveurs</strong>
+          <small>Cuisine de saison</small>
+        </span>
+      </a>
+
+      <button class="menu-toggle" id="menu-toggle"
+        aria-expanded="false" aria-controls="nav-links">
+        Menu ☰
+      </button>
+
+      <div class="nav-links" id="nav-links">
+        <a href="#histoire">Notre histoire</a>
+        <a href="#carte">La carte</a>
+        <a href="#galerie">Le restaurant</a>
+        <a class="button" href="#reservation">Réserver une table ↗</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="accueil">
+      <div class="container">
+        <div class="hero-content">
+          <span class="eyebrow">Le goût des bonnes choses</span>
+          <h1>La cuisine sincère.<br>Le plaisir <em>simple.</em></h1>
+          <p>
+            Une cuisine française de saison, des produits soigneusement
+            choisis et une table où l'on prend le temps de savourer.
+          </p>
+          <div class="hero-actions">
+            <a class="button" href="#carte">Découvrir la carte ↘</a>
+            <a class="button button-outline" href="#reservation">Nous contacter</a>
+          </div>
+          <div class="hero-note">
+            UN LIEU FICTIF CRÉÉ POUR UNE DÉMONSTRATION DE PORTFOLIO
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="highlights" aria-label="Nos engagements">
+      <div class="container highlight-grid">
+        <div class="highlight">
+          <strong>Produits de saison</strong>
+          <span>Une carte qui évolue au fil des mois</span>
+        </div>
+        <div class="highlight">
+          <strong>Cuisine maison</strong>
+          <span>Des recettes inspirées du terroir</span>
+        </div>
+        <div class="highlight">
+          <strong>Esprit convivial</strong>
+          <span>Une table pour se retrouver</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="histoire">
+      <div class="container story-grid">
+        <div class="story-image">
+          <img
+            src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1000&q=85"
+            alt="Table dressée dans un restaurant chaleureux"
+            loading="lazy">
+          <div class="image-label">Le plaisir de bien recevoir</div>
+        </div>
+
+        <div class="story-copy">
+          <span class="eyebrow">Notre philosophie</span>
+          <h2>Une belle assiette commence par de bons produits.</h2>
+          <p>
+            À L'Atelier des Saveurs, nous imaginons une cuisine généreuse,
+            inspirée par les saisons et les producteurs de notre région.
+          </p>
+          <p>
+            Notre idée est simple : quelques bons ingrédients, une préparation
+            soignée et une ambiance dans laquelle chacun se sent chez soi.
+          </p>
+          <p>
+            Pour un déjeuner entre collègues ou un dîner entre amis,
+            chaque moment est une occasion de se retrouver autour de la table.
+          </p>
+          <div class="signature">La gourmandise, tout simplement.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section menu-section" id="carte">
+      <div class="container">
+        <div class="center">
+          <span class="eyebrow">Une carte imaginée avec soin</span>
+          <h2>Les suggestions du moment</h2>
+          <p class="section-intro">
+            Des recettes de saison, des saveurs équilibrées et une cuisine
+            qui privilégie le plaisir. Exemples de plats et prix fictifs.
+          </p>
+        </div>
+
+        <div class="menu-grid">
+          <article class="menu-card">
+            <img
+              src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=85"
+              alt="Salade fraîche composée de légumes"
+              loading="lazy">
+            <div class="menu-card-content">
+              <h3>Le jardin gourmand</h3>
+              <p>
+                Légumes croquants, herbes fraîches, fromage de saison
+                et vinaigrette maison.
+              </p>
+              <span class="price">9 €</span>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <img
+              src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=85"
+              alt="Plat cuisiné et joliment présenté"
+              loading="lazy">
+            <div class="menu-card-content">
+              <h3>Le plat du chef</h3>
+              <p>
+                Une recette généreuse accompagnée de légumes
+                et d'une garniture de saison.
+              </p>
+              <span class="price">18 €</span>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <img
+              src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=800&q=85"
+              alt="Dessert glacé présenté dans une coupe"
+              loading="lazy">
+            <div class="menu-card-content">
+              <h3>La douceur maison</h3>
+              <p>
+                Un dessert gourmand qui change selon l'inspiration
+                et les produits disponibles.
+              </p>
+              <span class="price">7 €</span>
+            </div>
+          </article>
+        </div>
+
+        <p class="center menu-footnote">
+          Carte, ingrédients et tarifs fictifs : à personnaliser avant toute utilisation réelle.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="galerie">
+      <div class="container">
+        <div class="center">
+          <span class="eyebrow">Un moment à partager</span>
+          <h2>Bienvenue à notre table</h2>
+          <p class="section-intro">
+            Une atmosphère chaleureuse pour savourer les petits plaisirs
+            du quotidien.
+          </p>
+        </div>
+
+        <div class="gallery-grid">
+          <img
+            src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1000&q=85"
+            alt="Salle de restaurant conviviale"
+            loading="lazy">
+          <img
+            src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=85"
+            alt="Table préparée pour le service"
+            loading="lazy">
+          <img
+            src="https://images.unsplash.com/photo-1515003197210-e0cd7184f8b5?auto=format&fit=crop&w=800&q=85"
+            alt="Assiette de cuisine gastronomique"
+            loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <section class="section reservation" id="reservation">
+      <div class="container reservation-grid">
+        <div class="reservation-copy">
+          <span class="eyebrow">Nous rendre visite</span>
+          <h2>Votre prochaine belle table.</h2>
+          <p>
+            Une question sur la carte ou envie de préparer un repas en groupe ?
+            Retrouvez ici les informations de contact du restaurant.
+          </p>
+
+          <div class="info-line">
+            <strong>Adresse</strong>
+            <span>12 rue des Gourmets, 01000 Bourg-en-Bresse</span>
+          </div>
+
+          <div class="info-line">
+            <strong>Horaires indicatifs</strong>
+            <span>Du mardi au samedi · 12 h–14 h et 19 h–22 h</span>
+          </div>
+
+          <div class="info-line">
+            <strong>Téléphone de démonstration</strong>
+            <span>Coordonnées à remplacer avant publication commerciale</span>
+          </div>
+        </div>
+
+        <form class="booking-form" id="booking-form">
+          <span class="eyebrow">Votre demande</span>
+          <h3 style="font-size:27px; margin:10px 0 22px;">
+            Préparons votre visite
+          </h3>
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="name">Votre prénom</label>
+              <input id="name" name="name" autocomplete="given-name"
+                placeholder="Ex. Camille" required>
+            </div>
+
+            <div class="field">
+              <label for="people">Nombre de personnes</label>
+              <select id="people" name="people" required>
+                <option value="1">1 personne</option>
+                <option value="2" selected>2 personnes</option>
+                <option value="3">3 personnes</option>
+                <option value="4">4 personnes</option>
+                <option value="5">5 personnes</option>
+                <option value="6">6 personnes</option>
+                <option value="7+">7 personnes ou plus</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="date">Date souhaitée</label>
+              <input id="date" name="date" type="date" required>
+            </div>
+
+            <div class="field">
+              <label for="time">Heure souhaitée</label>
+              <select id="time" name="time" required>
+                <option value="12:00">12 h</option>
+                <option value="12:30">12 h 30</option>
+                <option value="13:00">13 h</option>
+                <option value="19:00">19 h</option>
+                <option value="19:30">19 h 30</option>
+                <option value="20:00">20 h</option>
+                <option value="20:30">20 h 30</option>
+                <option value="21:00">21 h</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="email">Votre adresse e-mail</label>
+            <input id="email" name="email" type="email"
+              autocomplete="email" placeholder="vous@exemple.fr" required>
+          </div>
+
+          <button class="button" type="submit">Tester la demande ↗</button>
+
+          <p class="form-note">
+            Démonstration uniquement : ce formulaire ne transmet aucune
+            demande au restaurant et ne confirme aucune réservation.
+          </p>
+
+          <div id="form-message" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <a class="brand" href="#accueil">
+        <span class="brand-icon">A</span>
+        <span>
+          <strong>L'Atelier des Saveurs</strong>
+          <small>Cuisine de saison</small>
+        </span>
+      </a>
+
+      <p>Projet fictif de portfolio · Créé à des fins de démonstration</p>
+      <span class="demo-tag">SITE DE DÉMONSTRATION</span>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById("menu-toggle");
+    const navLinks = document.getElementById("nav-links");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.textContent = isOpen ? "Fermer ✕" : "Menu ☰";
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.textContent = "Menu ☰";
+      });
+    });
+
+    const dateInput = document.getElementById("date");
+    const today = new Date();
+    const localToday = new Date(
+      today.getTime() - today.getTimezoneOffset() * 60000
+    ).toISOString().slice(0, 10);
+
+    dateInput.min = localToday;
+    dateInput.value = localToday;
+
+    document.getElementById("booking-form").addEventListener("submit", event => {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const message = document.getElementById("form-message");
+
+      message.style.display = "block";
+      message.textContent =
+        "Merci " + name + " ! Le formulaire fonctionne, mais ceci est une " +
+        "démonstration : aucune réservation n'a été envoyée ni confirmée.";
+    });
+  </script>
+</body>
+</html>
